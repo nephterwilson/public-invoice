@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wtec1 Invoice Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
+   <link rel="shortcut icon" href="./mg/wtech.png" type="image/png" />
+
+   <link rel="stylesheet" href="./styles.css">
+
+   <meta name="description" content="Create professional invoices easily with Wtec1 Invoice Studio. A fast, simple invoice generator for small businesses and shops.">
+
+</head>
+
+<body oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;" class="bg-gray-100">
+
+
+    <div class="watermark" id="publicWatermark">
+    <div class="watermark-text">Wtec1 Invoice Studio</div>
+    </div>
+
+
+    <!-- Invoice Header Bar -->
+<header class="bg-gray-600 text-white px-6 py-4 w-full">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <div>
+      <h1 class="text-xl font-bold">Wtec1 Invoice Studio</h1>
+      <p class="text-sm text-gray-300">Free Version!</p>
+    </div>
+    <div>
+       <img src="./mg/wtech.png" alt="Logo" class="w-16 h-16 rounded shadow-md" />
+    </div>
+  </div>
+</header>
+
+
+  <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6" id="invoice">
+    <!-- Header -->
+    <div class="flex justify-between items-start mb-6">
+      <div>
+        <h2 class="text-2xl font-bold">Invoice</h2>
+        <p id="invoiceNumber" class="text-sm text-gray-500">Invoice #<span id="invoiceId"></span></p>
+        <p id="invoiceDate" class="text-sm text-gray-500"></p>
+      </div>
+      <div class="text-right">
+        <div class="mb-2">
+        <input type="file" accept="image/*" id="logoUpload" class="mb-2" />
+        <img id="previewLogo" src="" alt="Logo Preview" class="w-20 h-20 mb-2 ml-auto hidden" />
+        </div>
+
+        <input id="shopName" placeholder="Shop Name" class="font-semibold text-lg outline-none border-b border-gray-400" />
+        <br />
+        <input id="shopContact" placeholder="Shop Contact" class="text-sm outline-none border-b border-gray-300" />
+      </div>
+    </div>
+
+    <!-- Client Info -->
+    <div class="grid grid-cols-2 gap-4 mb-6">
+      <input id="clientName" placeholder="Client Name" class="border border-gray-300 p-2 rounded w-full" />
+      <input id="clientContact" placeholder="Client Contact" class="border border-gray-300 p-2 rounded w-full" />
+    </div>
+
+    <!-- Table Header -->
+    <div class="grid grid-cols-4 gap-4 font-semibold border-b py-2">
+      <div>Item</div>
+      <div>Quantity</div>
+      <div>Price (MK)</div>
+      <div>Total (MK)</div>
+    </div>
+
+    <!-- Items Container -->
+    <div id="itemsContainer"></div>
+
+    <!-- Add Item Button -->
+    <button onclick="addItem()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">+ Add Item</button>
+
+    <!-- Total -->
+    <div class="flex justify-end mt-6 text-xl font-bold">
+      Total (MK): <span id="grandTotal" class="ml-2">0.00</span>
+    </div>
+
+    <!-- Generate PDF Button -->
+    <div class="text-center mt-8">
+      <button type="button" onclick="generatePDF()" class="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700">Generate PDF</button>
+    </div>
+  </div>
+
+  
+
+  <script>
+  let itemIndex = 0;
+
+ function addItem() {
+  const container = document.getElementById("itemsContainer");
+  const maxItems = 2;
+  const currentItems = container.querySelectorAll(".grid").length;
+
+  if (currentItems >= maxItems) {
+    alert("You can only add up to 2 items. Upgrade to Pro for Unlimited items");
+    return;
+  }
+
+  const row = document.createElement("div");
+  row.className = "grid grid-cols-5 gap-4 py-2 items-center";
+  row.innerHTML = `
+    <input type="text" placeholder="Item Name" class="border p-2 rounded" oninput="calculateTotal()">
+    <input type="number" placeholder="Qty" class="border p-2 rounded qty" oninput="calculateTotal()">
+    <input type="number" placeholder="Price" class="border p-2 rounded price" oninput="calculateTotal()">
+    <div class="total py-2 text-center">0.00</div>
+    <button onclick="removeItem(this)" class="text-red-500 hover:text-red-700 font-bold text-lg">×</button>
+  `;
+
+  container.appendChild(row);
+}
+
+
+    function calculateTotal() {
+    const rows = document.querySelectorAll("#itemsContainer .grid");
+    let grandTotal = 0;
+
+    rows.forEach(row => {
+        const qty = parseFloat(row.querySelector(".qty").value) || 0;
+    const price = parseFloat(row.querySelector(".price").value) || 0;
+    const total = qty * price;
+    
+    // Format total with commas
+    row.querySelector(".total").innerText = total.toLocaleString('en-US', { minimumFractionDigits: 2 });
+    
+    grandTotal += total;
+  });
+
+  // Format grand total with commas
+    document.getElementById("grandTotal").innerText = grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 });
+    }
+
+
+  async function generatePDF() {
+    const jsPDF = window.jspdf.jsPDF;
+    const doc = new jsPDF();
+
+    // Add watermark text on PDF (faint and rotated)
+    doc.setTextColor(150, 150, 150); // Light gray
+    doc.setFontSize(30);
+    doc.setFont('helvetica', 'bold');
+
+    doc.saveGraphicsState(); // Save current state
+
+    doc.setTextColor(200);
+    doc.setFontSize(24);
+    doc.setFont('helvetica', 'bold');
+
+    // Rotate and position watermark
+    doc.text("Wtec1 Invoice Studio", 50, 60, {
+      angle: + 20,
+      opacity: 0.1  // Optional with latest jsPDF
+    });
+
+    doc.restoreGraphicsState(); // Restore original state
+
+
+    // Add logo if available
+   let logoData = null;
+    const logoInput = document.getElementById("logoUpload");
+    if (logoInput && logoInput.files && logoInput.files[0]) {
+    const file = logoInput.files[0];
+    logoData = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(file);
+    });
+    }
+
+    if (logoData) {
+      doc.addImage(logoData, 'PNG', 150, 10, 40, 25);
+    }
+
+    // Header info
+   doc.setFontSize(16);
+doc.setFont('helvetica', 'bold');
+doc.text("INVOICE", 10, 15);
+
+doc.setFontSize(10);
+doc.setFont('helvetica', 'normal');
+
+
+
+const info = [
+  ["Invoice #:", document.getElementById('invoiceId').innerText],
+  ["Date & Time:", new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()],
+  ["Shop:", document.getElementById('shopName').value],
+  ["Contact:", document.getElementById('shopContact').value],
+  ["Client:", document.getElementById('clientName').value],
+  ["Contact:", document.getElementById('clientContact').value]
+];
+
+let y = 22;
+info.forEach(([label, value]) => {
+  doc.setFont('helvetica', 'bold');
+  doc.text(label, 12, y);
+  doc.setFont('helvetica', 'normal');
+  doc.text(value, 35, y);
+  y += 6;
+});
+
+
+    // Table with autoTable
+    const yStart = 60;
+    const rows = document.querySelectorAll("#itemsContainer .grid");
+    const tableData = Array.from(rows).map(row => {
+    const item = row.children[0].value || "-";
+    const qty = parseFloat(row.children[1].value) || 0;
+    const price = parseFloat(row.children[2].value) || 0;
+    const total = qty * price;
+
+    return [
+        item,
+        qty.toLocaleString('en-US'),
+        "MK " + price.toLocaleString('en-US', { minimumFractionDigits: 2 }),
+        "MK " + total.toLocaleString('en-US', { minimumFractionDigits: 2 })
+    ];
+    });
+
+
+    doc.autoTable({
+      startY: yStart,
+      head: [["Item", "Qty", "Price (MK)", "Total (MK)"]],
+      body: tableData,
+      theme: 'grid',
+      headStyles: {
+        fillColor: [0, 0, 0],
+        textColor: 255,
+        halign: 'left',
+        fontStyle: 'bold',
+        fontSize: 11
+      },
+      bodyStyles: {
+        halign: 'left',
+        textColor: 20,
+        fontSize: 10
+      },
+      styles: {
+        lineColor: 30,
+        lineWidth: 0.4,
+        font: 'helvetica',
+        fontStyle: 'normal'
+      }
+    });
+
+    // Add total below table
+    const finalY = doc.lastAutoTable.finalY + 12;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+
+    const rawTotal = parseFloat(document.getElementById('grandTotal').innerText.replace(/,/g, '')) || 0;
+    doc.text(`Total (MK): ${rawTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}`, 195, finalY, { align: "right" });
+
+
+    // Footer message at the bottom of the page
+        doc.setFont('helvetica', 'italic');
+        doc.setFontSize(10);
+        doc.text("Thank you for your business!", 105, 275, { align: "center" });
+
+
+    doc.save("invoice.pdf");
+  }
+
+  async function loadImageAsBase64(url) {
+    try {
+      const res = await fetch(url);
+      const blob = await res.blob();
+      return await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+      });
+    } catch (e) {
+      console.warn("Logo not found or failed to load.");
+      return null;
+    }
+  }
+
+  function generateInvoiceNumber() {
+  let lastInvoiceNumber = localStorage.getItem("lastInvoiceNumber");
+
+  if (!lastInvoiceNumber) {
+    lastInvoiceNumber = 2830; // Default start number
+  } else {
+    lastInvoiceNumber = parseInt(lastInvoiceNumber) + 1;
+  }
+
+  localStorage.setItem("lastInvoiceNumber", lastInvoiceNumber);
+  document.getElementById("invoiceId").innerText = lastInvoiceNumber;
+}
+
+
+  window.onload = () => {
+    generateInvoiceNumber();
+    document.getElementById("invoiceDate").innerText = `Date: ${new Date().toLocaleDateString()}`;
+    addItem();
+  }
+
+//  Previe the logo
+
+        const logoInput = document.getElementById('logoUpload');
+        const previewLogo = document.getElementById('previewLogo');
+
+        logoInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewLogo.src = e.target.result;
+                previewLogo.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+            }
+        });
+
+</script>
+
+
+<!-- Invoice Footer Bar -->
+<footer class="bg-gray-100 text-center text-gray-500 text-sm py-4 border-t mt-12 rounded-b-lg">
+  <p>&copy; <span id="currentYear"></span> Excellence Shop. All rights reserved.</p>
+  <p>Developed by <strong>Wtec1 Technologies</strong> | WhatsApp: +265 995 591 835</p>
+</footer>
+
+<script>
+  // Dynamically set current year in footer
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
+
+
+</body>
+</html>
+
+

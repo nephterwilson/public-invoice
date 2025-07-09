@@ -1,0 +1,81 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upgrade to Pro | Wtec1 Invoice Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="shortcut icon" href="./mg/wtech.png" type="image/png" />
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-indigo-700 text-white py-6 shadow-md">
+    <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Wtec1 Invoice Studio</h1>
+      <a href="./index.html" class="text-sm hover:underline">← Back to Home</a>
+    </div>
+  </header>
+
+  <!-- Upgrade Section -->
+  <section class="max-w-5xl mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">Upgrade to Pro</h2>
+      <p class="text-lg text-gray-600">Choose the plan that suits your business best</p>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Free Plan -->
+      <div class="bg-white border rounded-lg p-6 shadow-sm">
+        <h3 class="text-xl font-bold text-indigo-600 mb-4">Free Plan</h3>
+        <ul class="space-y-3 text-sm">
+          <li>✅ Generate unlimited invoices</li>
+          <li>✅ Add limited items (5)</li>
+          <li>✅ Download as PDF</li>
+          <li>❌ Permanent Custom logos on invoice</li>
+          <li>❌ Watermark removal</li>
+          <li>❌ Priority support</li>
+        </ul>
+        <div class="mt-6 text-center text-indigo-600 font-semibold">Free Forever</div>
+      </div>
+
+      <!-- Pro Plan -->
+      <div class="bg-white border-2 border-yellow-400 rounded-lg p-6 shadow-lg relative">
+        <div class="absolute -top-4 right-4 bg-yellow-400 text-white text-xs px-3 py-1 rounded-full font-semibold">Best Value</div>
+        <h3 class="text-xl font-bold text-yellow-600 mb-4">Pro Plan</h3>
+        <ul class="space-y-3 text-sm">
+          <li>✅ Everything in Free</li>
+          <li>✅ Upload custom logos</li>
+          <li>✅ Custom Permanent logos</li>
+          <li>✅ Remove watermark</li>
+          <li>✅ Priority WhatsApp support</li>
+          <li>✅ Cloud invoice backup (coming soon)</li>
+        </ul>
+        <div class="mt-6 text-center text-yellow-600 font-bold text-lg">Only MK 5,000/month</div>
+        <div class="text-center mt-6">
+          <a href="https://wa.me/265995591835?text=I%20want%20to%20upgrade%20to%20Pro%20Invoice%20Studio" 
+             target="_blank"
+             class="inline-block bg-yellow-500 text-white px-6 py-3 rounded-full font-semibold shadow-md hover:bg-yellow-600 transition">
+            Upgrade Now on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 text-center py-6 text-sm text-gray-600 mt-12 border-t">
+    <p>&copy; <span id="year"></span> Wtec1 Technologies. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

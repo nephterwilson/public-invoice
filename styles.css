@@ -1,0 +1,16 @@
+
+
+
+
+.watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.08);
+  font-weight: bold;
+  pointer-events: none;
+  z-index: 0;
+  white-space: nowrap;
+}

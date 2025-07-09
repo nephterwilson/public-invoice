@@ -1,0 +1,121 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wtec1 Invoice Studio</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Optional: favicon -->
+  <link rel="shortcut icon" href="./mg/wtech.png" type="image/png" />
+
+  <meta name="description" content="Create professional invoices easily with Wtec1 Invoice Studio. A fast, simple invoice generator for small businesses and shops.">
+
+</head>
+
+<body oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;" class="bg-gradient-to-r from-blue-50 to-indigo-50 min-h-screen flex flex-col">
+
+  <!-- HEADER -->
+  <header class="bg-gray-900 text-white px-6 py-4 w-full shadow-md">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div>
+         <h1 class="text-xl font-bold">Wtec1 Invoice Studio</h1>
+        <p class="text-sm text-gray-300">Powered by Wtec1 Technologies</p>
+      </div>
+      <div>
+        <img src="./mg/wtech.png" alt="Logo" class="w-16 h-16 rounded shadow-md" />
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-grow max-w-5xl mx-auto p-8 bg-white rounded-3xl shadow-xl mt-12 mb-16 flex flex-col md:flex-row items-center gap-12">
+    
+    <!-- Text Content -->
+    <section class="max-w-xl text-center md:text-left"> 
+  <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 leading-snug text-center">
+    Create Professional Invoices <br class="hidden md:block" />
+    Quickly & Effortlessly
+  </h2>
+
+  <p class="text-indigo-600 font-semibold mb-6 text-center md:text-left">
+    Fast. Simple. Powerful.
+  </p>
+
+  <p class="text-gray-700 mb-8 text-lg">
+    Generate clean, professional invoices in seconds — built for busy businesses.
+  </p>
+
+  <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
+    <!-- Primary button -->
+    <a href="./solution.html" 
+       class="inline-block bg-indigo-600 text-white px-10 py-4 rounded-full font-semibold shadow-lg hover:bg-indigo-700 hover:scale-105 transition duration-300">
+       Get Started Now
+    </a>
+
+    <!-- Upgrade button -->
+    <a href="./upgrade.html"
+       class="inline-block bg-yellow-500 text-white px-10 py-4 rounded-full font-semibold shadow-lg hover:bg-yellow-600 hover:scale-105 transition duration-300">
+       Upgrade to Pro
+    </a>
+  </div>
+</section>
+
+
+    <!-- Image / Illustration -->
+  <section class="max-w-md mx-auto">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 400 300"
+    class="rounded-xl shadow-lg mx-auto"
+    style="width: 100%; height: auto; max-width: 400px;"
+    fill="none"
+  >
+    <!-- Outer Invoice Border -->
+    <rect x="30" y="30" width="340" height="240" rx="15" ry="15" fill="#f0f4ff" stroke="#4f46e5" stroke-width="3" />
+
+    <!-- Top Separator -->
+    <line x1="50" y1="70" x2="350" y2="70" stroke="#4f46e5" stroke-width="2.5" />
+
+    <!-- Invoice Rows -->
+    <rect x="50" y="90" width="300" height="30" fill="#6366f1" rx="5" />
+    <rect x="50" y="130" width="300" height="30" fill="#818cf8" rx="5" />
+    <rect x="50" y="170" width="300" height="30" fill="#a5b4fc" rx="5" />
+    <rect x="50" y="210" width="300" height="30" fill="#c7d2fe" rx="5" />
+
+    <!-- Labels -->
+    <text x="60" y="110" font-family="Arial" font-size="14" font-weight="bold" fill="white">Item Name</text>
+    <text x="60" y="150" font-family="Arial" font-size="14" font-weight="bold" fill="#1e1b4b">Quantity</text>
+    <text x="60" y="190" font-family="Arial" font-size="14" font-weight="bold" fill="#1e1b4b">Price</text>
+    <text x="60" y="230" font-family="Arial" font-size="14" font-weight="bold" fill="#1e1b4b">Total</text>
+
+    <!-- PDF Download Icon -->
+    <circle cx="350" cy="250" r="15" fill="#4f46e5" />
+    <polyline points="342,244 350,258 358,244" stroke="white" stroke-width="2" fill="none" />
+  </svg>
+</section>
+
+
+  </main>
+
+
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-100 text-center text-gray-500 text-sm py-6 border-t">
+    <p>&copy; <span id="year"></span> Excellence Shop. Shop. All rights reserved.</p>
+    <p>Developed by <strong>Wtec1 Technologies</strong> | WhatsApp: +265 995 591 835</p>
+  </footer>
+
+  <script>
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+
+</html>
