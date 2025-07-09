@@ -14,24 +14,73 @@
   <!-- Optional: favicon -->
   <link rel="shortcut icon" href="./mg/wtech.png" type="image/png" />
 
-  <meta name="description" content="Create professional invoices easily with Wtec1 Invoice Studio. A fast, simple invoice generator for small businesses and shops.">
+  <!-- Primary Meta Tags -->
+<!-- Primary Meta Tags -->
+<title>Wtec1 Invoice Studio — Professional Invoice Generator</title>
+<meta name="title" content="Wtec1 Invoice Studio — Professional Invoice Generator">
+<meta name="description" content="Create professional invoices in seconds with Wtec1 Invoice Studio. Simple, fast, and tailored for busy businesses.">
+
+<!-- Open Graph / Facebook / LinkedIn -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://smart.wtec1.com">
+<meta property="og:title" content="Wtec1 Invoice Studio — Professional Invoice Generator">
+<meta property="og:description" content="Create professional invoices in seconds with Wtec1 Invoice Studio. Simple, fast, and tailored for busy businesses.">
+<meta property="og:image" content="https://smart.wtec1.com/mg/invoice-generator.jpg">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://smart.wtec1.com">
+<meta name="twitter:title" content="Wtec1 Invoice Studio — Professional Invoice Generator">
+<meta name="twitter:description" content="Create professional invoices in seconds with Wtec1 Invoice Studio. Simple, fast, and tailored for busy businesses.">
+<meta name="twitter:image" content="https://smart.wtec1.com/mg/invoice-generator.jpg">
 
 </head>
 
 <body oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;" class="bg-gradient-to-r from-blue-50 to-indigo-50 min-h-screen flex flex-col">
 
   <!-- HEADER -->
-  <header class="bg-gray-900 text-white px-6 py-4 w-full shadow-md">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
-      <div>
-         <h1 class="text-xl font-bold">Wtec1 Invoice Studio</h1>
-        <p class="text-sm text-gray-300">Powered by Wtec1 Technologies</p>
-      </div>
-      <div>
-        <img src="./mg/wtech.png" alt="Logo" class="w-16 h-16 rounded shadow-md" />
-      </div>
+
+  <header class="bg-gray-600 text-white px-6 py-4 w-full shadow-md">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <div>
+      <!-- Logo -->
+      <a href="./index.html" class="flex items-center space-x-2">
+        <img src="./mg/wtech.png" class="h-8 w-8" alt="Logo" />
+        <span class="text-xl font-bold">Wtec1 Invoice Studio</span>
+      </a>
+      <p class="text-sm text-green-600">Powered by Wtec1 Technologies</p>
     </div>
-  </header>
+
+    <div class="flex items-center space-x-6">
+      <!-- Desktop Navigation -->
+      <nav class="space-x-6 hidden md:flex">
+        <a href="./pro-version.html" class="text-white font-medium hover:text-indigo-600 transition">Pro Version</a>
+        <a href="./upgrade.html" class="text-white font-medium hover:text-indigo-600 transition">Pricing</a>
+        <a href="https://va.wtec1.xyz/contact.html" class="text-white font-medium hover:text-indigo-600 transition" target="_blank">Contact</a>
+      </nav>
+
+      <!-- Mobile Menu Icon -->
+      <button id="menuToggle" class="md:hidden text-indigo-700 text-2xl focus:outline-none" aria-label="Toggle menu">
+        ☰
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu (outside the flex container) -->
+  <div id="mobileMenu" class="md:hidden px-6 pb-4 hidden bg-white bg-opacity-90 backdrop-blur-sm">
+    <a href="./pro-version.html" class="block py-2 text-gray-700 hover:text-indigo-600">Pro Version</a>
+    <a href="./upgrade.html" class="block py-2 text-gray-700 hover:text-indigo-600">Pricing</a>
+    <a href="https://va.wtec1.xyz/contact.html" class="block py-2 text-gray-700 hover:text-indigo-600" target="_blank">Contact</a>
+  </div>
+</header>
+
+<script>
+  document.getElementById("menuToggle").addEventListener("click", function () {
+    document.getElementById("mobileMenu").classList.toggle("hidden");
+  });
+</script>
+
+
 
   <!-- MAIN CONTENT -->
   <main class="flex-grow max-w-5xl mx-auto p-8 bg-white rounded-3xl shadow-xl mt-12 mb-16 flex flex-col md:flex-row items-center gap-12">
@@ -53,7 +102,7 @@
 
   <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
     <!-- Primary button -->
-    <a href="./solution.html" 
+    <a href="./free-version.html" 
        class="inline-block bg-indigo-600 text-white px-10 py-4 rounded-full font-semibold shadow-lg hover:bg-indigo-700 hover:scale-105 transition duration-300">
        Get Started Now
     </a>
@@ -107,7 +156,7 @@
 
   <!-- FOOTER -->
   <footer class="bg-gray-100 text-center text-gray-500 text-sm py-6 border-t">
-    <p>&copy; <span id="year"></span> Excellence Shop. Shop. All rights reserved.</p>
+    <p>&copy; <span id="year"></span>  All rights reserved.</p>
     <p>Developed by <strong>Wtec1 Technologies</strong> | WhatsApp: +265 995 591 835</p>
   </footer>
 

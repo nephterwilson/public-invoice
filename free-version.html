@@ -29,13 +29,15 @@
     <!-- Invoice Header Bar -->
 <header class="bg-gray-600 text-white px-6 py-4 w-full">
   <div class="max-w-7xl mx-auto flex justify-between items-center">
-    <div>
-      <h1 class="text-xl font-bold">Wtec1 Invoice Studio</h1>
-      <p class="text-sm text-gray-300">Free Version!</p>
+   <div>
+      <!-- Logo -->
+      <a href="./index.html" class="flex items-center space-x-2">
+        <img src="./mg/wtech.png" class="h-8 w-8" alt="Logo" />
+        <span class="text-xl font-bold">Wtec1 Invoice Studio</span>
+      </a>
+      <p class="text-sm text-green-600">Fre Version</p>
     </div>
-    <div>
-       <img src="./mg/wtech.png" alt="Logo" class="w-16 h-16 rounded shadow-md" />
-    </div>
+
   </div>
 </header>
 
@@ -48,11 +50,24 @@
         <p id="invoiceNumber" class="text-sm text-gray-500">Invoice #<span id="invoiceId"></span></p>
         <p id="invoiceDate" class="text-sm text-gray-500"></p>
       </div>
+      
       <div class="text-right">
-        <div class="mb-2">
-        <input type="file" accept="image/*" id="logoUpload" class="mb-2" />
+       <div class="mb-2 text-right">
+        <label for="logoUpload" class="block text-xs font-medium text-gray-700 mb-1">Upload your shop logo (optional)</label>
+
+        <!-- Hidden File Input -->
+        <input type="file" accept="image/*" id="logoUpload" class="hidden" />
+
+        <!-- Minimal custom button -->
+        <label for="logoUpload"
+              class="inline-block bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded cursor-pointer hover:bg-gray-300 transition">
+          Choose Logo
+        </label>
+
+        <!-- Preview Image -->
         <img id="previewLogo" src="" alt="Logo Preview" class="w-20 h-20 mb-2 ml-auto hidden" />
-        </div>
+      </div>
+
 
         <input id="shopName" placeholder="Shop Name" class="font-semibold text-lg outline-none border-b border-gray-400" />
         <br />
@@ -98,11 +113,11 @@
 
  function addItem() {
   const container = document.getElementById("itemsContainer");
-  const maxItems = 2;
+  const maxItems = 3;
   const currentItems = container.querySelectorAll(".grid").length;
 
   if (currentItems >= maxItems) {
-    alert("You can only add up to 2 items. Upgrade to Pro for Unlimited items");
+    alert("You can only add up to 3 items. Upgrade to Pro for Unlimited items");
     return;
   }
 
@@ -327,7 +342,7 @@ info.forEach(([label, value]) => {
 
 <!-- Invoice Footer Bar -->
 <footer class="bg-gray-100 text-center text-gray-500 text-sm py-4 border-t mt-12 rounded-b-lg">
-  <p>&copy; <span id="currentYear"></span> Excellence Shop. All rights reserved.</p>
+  <p>&copy; <span id="currentYear"></span> Free Version. All rights reserved.</p>
   <p>Developed by <strong>Wtec1 Technologies</strong> | WhatsApp: +265 995 591 835</p>
 </footer>
 
